@@ -2,6 +2,15 @@ from django.db import models
 
 # Create your models here.
 
+class Competencia(models.Model):
+    tipo = models.CharField(max_length=100)
+    descricao = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.tipo
+
+
+
 class Tecnologia(models.Model):
     nome = models.CharField(max_length=100)
     site_oficial = models.CharField(max_length=100)
@@ -20,6 +29,7 @@ class Projeto(models.Model):
     repositorio = models.CharField(max_length=100)
     conceitos = models.CharField(max_length=500)
     tecnologia = models.ManyToManyField(Tecnologia, related_name="projetos")
+    competencia = models.ManyToManyField(Competencia, related_name="projetos")
 
     def __str__(self):
         return self.nome
