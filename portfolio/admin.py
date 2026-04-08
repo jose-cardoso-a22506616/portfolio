@@ -32,9 +32,15 @@ class CompetenciaAdmin(admin.ModelAdmin):
     ordering = ("tipo",)
     search_fields =("tipo",)
 
+class FormacaoAdmin(admin.ModelAdmin):
+    list_display = ("tipo", "descricao", "data")
+    ordering = ("tipo",)
+    search_fields = ("tipo",)
+
 admin.site.register(UC, UCAdmmin)
 admin.site.register(Licenciatura, LicenciaturaAdmin)
 admin.site.register(Docente, DocenteAdmin)
 admin.site.register(Tecnologia, TecnologiaAdmin)
 admin.site.register(Projeto, ProjetoAdmin)
 admin.site.register(Competencia, CompetenciaAdmin)
+admin.site.register(Formacao, FormacaoAdmin)
