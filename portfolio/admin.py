@@ -37,6 +37,11 @@ class FormacaoAdmin(admin.ModelAdmin):
     ordering = ("tipo",)
     search_fields = ("tipo",)
 
+class MakingOfAdmin(admin.ModelAdmin):
+    list_display = ("descricao",)
+    ordering = ("descricao",)
+    search_fields = ("descricao",)
+
 admin.site.register(UC, UCAdmmin)
 admin.site.register(Licenciatura, LicenciaturaAdmin)
 admin.site.register(Docente, DocenteAdmin)
@@ -44,3 +49,4 @@ admin.site.register(Tecnologia, TecnologiaAdmin)
 admin.site.register(Projeto, ProjetoAdmin)
 admin.site.register(Competencia, CompetenciaAdmin)
 admin.site.register(Formacao, FormacaoAdmin)
+admin.site.register(MakingOf, MakingOfAdmin)
