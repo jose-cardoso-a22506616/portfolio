@@ -22,7 +22,13 @@ class TecnologiaAdmin(admin.ModelAdmin):
     ordering = ("nome",)
     search_fields = ("nome",)
 
+class ProjetoAdmin(admin.ModelAdmin):
+    list_display = ("nome", "descricao")
+    ordering = ("nome",)
+    search_fields = ("nome",)
+
 admin.site.register(UC, UCAdmmin)
 admin.site.register(Licenciatura, LicenciaturaAdmin)
 admin.site.register(Docente, DocenteAdmin)
 admin.site.register(Tecnologia, TecnologiaAdmin)
+admin.site.register(Projeto, ProjetoAdmin)
