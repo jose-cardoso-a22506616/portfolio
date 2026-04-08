@@ -2,11 +2,19 @@ from django.db import models
 
 # Create your models here.
 
+class Tecnologia(models.Model):
+    nome = models.CharField(max_length=100)
+    site_oficial = models.CharField(max_length=100)
+    descricao = models.CharField(max_length=500)
+    logo = models.ImageField(upload_to="fotos_tecnologia/", blank=True)
+    classificacao = models.IntegerField()
 
+    def __str__(self):
+        return f"Tecnologia: {self.nome} | Classificação: {self.classificacao}/5"
     
 
 
-class Projetos(models.Model):
+class Projeto(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.CharField(max_length=500)
     repositorio = models.CharField(max_length=100)

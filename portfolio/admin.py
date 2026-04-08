@@ -17,6 +17,12 @@ class DocenteAdmin(admin.ModelAdmin):
     ordering = ("nome",)
     search_fields = ("nome",)
 
+class TecnologiaAdmin(admin.ModelAdmin):
+    list_display = ("nome",)
+    ordering = ("nome",)
+    search_fields = ("nome",)
+
 admin.site.register(UC, UCAdmmin)
 admin.site.register(Licenciatura, LicenciaturaAdmin)
 admin.site.register(Docente, DocenteAdmin)
+admin.site.register(Tecnologia, TecnologiaAdmin)
