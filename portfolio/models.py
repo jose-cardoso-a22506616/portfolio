@@ -2,9 +2,26 @@ from django.db import models
 
 # Create your models here.
 
+class Tfc(models.Model):
+    titulo = models.CharField(max_length=100)
+    aluno = models.CharField(max_length=100)
+    orientador = models.CharField(max_length=100)
+    licenciatura = models.CharField(max_length=100)
+    pdf = models.URLField()
+    mail = models.EmailField()
+    resumo = models.TextField()
+    palavras_chave = models.CharField(max_length=100)
+    tecnologias = models.CharField(max_length=100)
+    rating = models.IntegerField()
+
+    def __str__(self):
+        return self.titulo
+
+
+
 class MakingOf(models.Model):
     fotos = models.ImageField(upload_to="fotos_makingof/", blank=True)
-    descricao = models.CharField(max_length=500)
+    descricao = models.TextField()
     alteracao = models.CharField(max_length=500, blank=True)
     justificacao = models.CharField(max_length=500, blank=True)
     llm = models.CharField(max_length=500, blank=True)
@@ -16,7 +33,7 @@ class MakingOf(models.Model):
 
 class Formacao(models.Model):
     tipo = models.CharField(max_length=100)
-    descricao = models.CharField(max_length=100)
+    descricao = models.TextField()
     data = models.DateField()
 
     def __str__(self):
@@ -26,7 +43,7 @@ class Formacao(models.Model):
 
 class Competencia(models.Model):
     tipo = models.CharField(max_length=100)
-    descricao = models.CharField(max_length=100)
+    descricao = models.TextField()
 
     def __str__(self):
         return self.tipo
@@ -35,8 +52,8 @@ class Competencia(models.Model):
 
 class Tecnologia(models.Model):
     nome = models.CharField(max_length=100)
-    site_oficial = models.CharField(max_length=100)
-    descricao = models.CharField(max_length=500)
+    site_oficial = models.URLField(blank=True)
+    descricao = models.TextField()
     logo = models.ImageField(upload_to="fotos_tecnologia/", blank=True)
     classificacao = models.IntegerField()
     formacao = models.ManyToManyField(Formacao, related_name="tecnologias", blank=True)
@@ -48,7 +65,7 @@ class Tecnologia(models.Model):
 
 class Projeto(models.Model):
     nome = models.CharField(max_length=100)
-    descricao = models.CharField(max_length=500)
+    descricao = models.TextField()
     repositorio = models.CharField(max_length=100)
     conceitos = models.CharField(max_length=500)
     tecnologia = models.ManyToManyField(Tecnologia, related_name="projetos")
@@ -61,7 +78,7 @@ class Projeto(models.Model):
 class Docente(models.Model):
     nome = models.CharField(max_length=100)
     mail = models.EmailField()
-    site = models.CharField(max_length=100)
+    site = models.URLField(blank=True)
 
     def __str__(self):
         return self.nome
@@ -69,6 +86,7 @@ class Docente(models.Model):
     
 class UC(models.Model):
     nome = models.CharField(max_length=100)
+    descricao = models.TextField()
     ano = models.IntegerField()
     semestre = models.IntegerField()
     docente = models.ManyToManyField(Docente, related_name="ucs")
