@@ -3,7 +3,7 @@ from .models import *
 
 # Register your models here.
 class UCAdmmin(admin.ModelAdmin):
-    list_display = ("nome",)
+    list_display = ("nome", "ano", "semestre")
     ordering = ("nome",)
     search_fields = ("nome",)
 
@@ -13,17 +13,17 @@ class LicenciaturaAdmin(admin.ModelAdmin):
     search_fields = ("nome",)
 
 class DocenteAdmin(admin.ModelAdmin):
-    list_display = ("nome",)
+    list_display = ("nome", "mail", "site")
     ordering = ("nome",)
     search_fields = ("nome",)
 
 class TecnologiaAdmin(admin.ModelAdmin):
-    list_display = ("nome",)
+    list_display = ("nome", "site_oficial")
     ordering = ("nome",)
     search_fields = ("nome",)
 
 class ProjetoAdmin(admin.ModelAdmin):
-    list_display = ("nome", "descricao")
+    list_display = ("nome", "descricao", "repositorio")
     ordering = ("nome",)
     search_fields = ("nome",)
 
