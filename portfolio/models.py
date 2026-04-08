@@ -11,6 +11,7 @@ class Tfc(models.Model):
     mail = models.EmailField()
     resumo = models.TextField()
     palavras_chave = models.CharField(max_length=100)
+    area = models.CharField(max_length=100)
     tecnologias = models.CharField(max_length=100)
     rating = models.IntegerField()
 
