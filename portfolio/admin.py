@@ -13,9 +13,9 @@ class LicenciaturaAdmin(admin.ModelAdmin):
     search_fields = ("nome",)
 
 class DocenteAdmin(admin.ModelAdmin):
-    list_display = ("nome", "mail", "site")
-    ordering = ("nome",)
-    search_fields = ("nome",)
+    list_display = ("nome", "employee_code","email", "degree", "regime")
+    ordering = ("nome", "employee_code")
+    search_fields = ("nome", "employee_code", "email")
 
 class TecnologiaAdmin(admin.ModelAdmin):
     list_display = ("nome", "site_oficial")

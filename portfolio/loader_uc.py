@@ -3,11 +3,22 @@ import json
 
 
 UC.objects.all().delete()
+Docente.objects.all().delete
 
 with open("portfolio/data/ULHT260-PT.json") as f:
-    uc_info = json.load(f)
+    json_info = json.load(f)
 
-    for uc in uc_info["courseFlatPlan"]:
+    for teacher in json_info["teachers"]:
+        Docente.objects.create(
+            nome=teacher.get("fullName"),
+            email=teacher.get("email"),
+            card_code=teacher.get("cardCode"),
+            employee_code=teacher.get("employeeCode"),
+            degree=teacher.get("degree"),
+            regime=teacher.get("regimen")
+        )
+
+    for uc in json_info["courseFlatPlan"]:
         uc_code_file = uc["curricularIUnitReadableCode"] + "-PT" + ".json" #vai buscar o ficheiro json referente ao código da uc atual
 
         
@@ -17,14 +28,15 @@ with open("portfolio/data/ULHT260-PT.json") as f:
 
             
             UC.objects.create(
-                descricao = uc_json["presentation"],
-                objetivo = uc_json["objectives"],
-                programa = uc_json["programme"],
-                avaliacao = uc_json["avaliacao"],
                 nome = uc["curricularUnitName"],
                 ano = uc["curricularYear"],
                 semestre = uc["semester"],
-                ects = uc["ects"]
+                ects = uc["ects"],
+
+                descricao = uc_json["presentation"],
+                objetivo = uc_json["objectives"],
+                programa = uc_json["programme"]
             )
+
 
 

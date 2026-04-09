@@ -8,7 +8,7 @@ class Tfc(models.Model):
     orientador = models.CharField(max_length=100)
     licenciatura = models.CharField(max_length=100)
     pdf = models.URLField()
-    mail = models.EmailField()
+    email = models.EmailField()
     resumo = models.TextField()
     palavras_chave = models.CharField(max_length=100)
     area = models.CharField(max_length=100)
@@ -78,8 +78,11 @@ class Projeto(models.Model):
 
 class Docente(models.Model):
     nome = models.CharField(max_length=100)
-    mail = models.EmailField()
-    site = models.URLField(blank=True)
+    email = models.EmailField(blank=True, null=True)
+    card_code = models.IntegerField()
+    employee_code = models.IntegerField()
+    degree = models.CharField(max_length=25, blank=True, null=True)
+    regime = models.CharField(max_length=25)
 
     def __str__(self):
         return self.nome
@@ -90,7 +93,6 @@ class UC(models.Model):
     descricao = models.TextField(blank=True)
     objetivo = models.TextField(blank=True)
     programa = models.TextField(blank=True)
-    avaliacao = models.TextField(blank=True)
 
     ano = models.IntegerField()
     semestre = models.CharField(max_length=20)
