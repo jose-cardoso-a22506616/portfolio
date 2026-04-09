@@ -87,9 +87,15 @@ class Docente(models.Model):
     
 class UC(models.Model):
     nome = models.CharField(max_length=100)
-    descricao = models.TextField()
+    descricao = models.TextField(blank=True)
+    objetivo = models.TextField(blank=True)
+    programa = models.TextField(blank=True)
+    avaliacao = models.TextField(blank=True)
+
     ano = models.IntegerField()
-    semestre = models.IntegerField()
+    semestre = models.IntegerField() #terá que ser inserido manualmente (o json não vem com o semestre)
+    ects = models.IntegerField()
+
     docente = models.ManyToManyField(Docente, related_name="ucs")
     imagem = models.ImageField(upload_to="fotos_uc/", blank=True)
 
