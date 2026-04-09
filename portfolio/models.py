@@ -93,7 +93,7 @@ class UC(models.Model):
     avaliacao = models.TextField(blank=True)
 
     ano = models.IntegerField()
-    semestre = models.IntegerField() #terá que ser inserido manualmente (o json não vem com o semestre)
+    semestre = models.CharField(max_length=20)
     ects = models.IntegerField()
 
     docente = models.ManyToManyField(Docente, related_name="ucs")
