@@ -41,7 +41,7 @@ with open("portfolio/data/ULHT260-PT.json") as f:
 
     Licenciatura.objects.create(
         nome = json_info["courseDetail"]["courseName"],
-        curso_codigo = json_info["courseDetail"]["courseECTS"],
+        curso_codigo = json_info["courseDetail"]["courseCode"],
         semestres = json_info["courseDetail"]["semesters"],
         descricao = json_info["courseDetail"]["presentation"],
         objetivos = json_info["courseDetail"]["objectives"],

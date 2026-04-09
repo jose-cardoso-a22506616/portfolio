@@ -8,9 +8,9 @@ class UCAdmmin(admin.ModelAdmin):
     search_fields = ("nome",)
 
 class LicenciaturaAdmin(admin.ModelAdmin):
-    list_display = ("nome", "descricao")
-    ordering = ("nome",)
-    search_fields = ("nome",)
+    list_display = ("nome", "curso_codigo", "semestres", "curso_ects")
+    ordering = ("nome", "curso_codigo")
+    search_fields = ("nome", "curso_codigo")
 
 class DocenteAdmin(admin.ModelAdmin):
     list_display = ("nome", "employee_code","email", "degree", "regime")
