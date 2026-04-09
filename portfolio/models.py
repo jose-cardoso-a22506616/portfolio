@@ -94,6 +94,8 @@ class UC(models.Model):
     objetivo = models.TextField(blank=True)
     programa = models.TextField(blank=True)
 
+    projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE, related_name="ucs", blank=True, null=True)
+
     ano = models.IntegerField()
     semestre = models.CharField(max_length=20)
     ects = models.IntegerField()
@@ -108,7 +110,11 @@ class UC(models.Model):
 
 class Licenciatura(models.Model):
     nome = models.CharField(max_length=100)
-    descricao = models.CharField(max_length=500)
+    curso_codigo = models.IntegerField()
+    semestres = models.IntegerField()
+    descricao = models.TextField(blank=True)
+    objetivos = models.TextField(blank=True)
+    curso_ects = models.IntegerField()
     uc = models.ManyToManyField(UC, related_name="licenciaturas", blank=True)
 
     def __str__(self):

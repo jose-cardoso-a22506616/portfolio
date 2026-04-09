@@ -3,7 +3,8 @@ import json
 
 
 UC.objects.all().delete()
-Docente.objects.all().delete
+Docente.objects.all().delete()
+Licenciatura.objects.all().delete()
 
 with open("portfolio/data/ULHT260-PT.json") as f:
     json_info = json.load(f)
@@ -37,6 +38,15 @@ with open("portfolio/data/ULHT260-PT.json") as f:
                 objetivo = uc_json["objectives"],
                 programa = uc_json["programme"]
             )
+
+    Licenciatura.objects.create(
+        nome = json_info["courseDetail"]["courseName"],
+        curso_codigo = json_info["courseDetail"]["courseECTS"],
+        semestres = json_info["courseDetail"]["semesters"],
+        descricao = json_info["courseDetail"]["presentation"],
+        objetivos = json_info["courseDetail"]["objectives"],
+        curso_ects = json_info["courseDetail"]["courseECTS"],
+    )
 
 
 
