@@ -67,7 +67,7 @@ class Tecnologia(models.Model):
 class Projeto(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
-    repositorio = models.CharField(max_length=100)
+    repositorio = models.CharField(max_length=100, blank=True)
     conceitos = models.CharField(max_length=500)
     tecnologia = models.ManyToManyField(Tecnologia, related_name="projetos")
     competencia = models.ManyToManyField(Competencia, related_name="projetos")
@@ -100,7 +100,7 @@ class UC(models.Model):
     semestre = models.CharField(max_length=20)
     ects = models.IntegerField()
 
-    docente = models.ManyToManyField(Docente, related_name="ucs")
+    docente = models.ManyToManyField(Docente, related_name="ucs", blank=True)
     imagem = models.ImageField(upload_to="fotos_uc/", blank=True)
 
     def __str__(self):
