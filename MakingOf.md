@@ -1,4 +1,6 @@
-## Primeiro comecei por definir as entidades e os seus atributos:
+# Making Of
+
+Primeiro comecei por definir as entidades e os seus atributos:
 
 1. UC
     - nome
@@ -37,25 +39,16 @@
     - email
     - classificacao
 
-6. Professor
-    - nome
-    - uc (relação com a entidade **UC**)
-    - formacao
-    - email
-    - site
-
-Esta entidade embora não tenha sido pedida, achei por bem colocar já que a meu ver faz todo sentido incluir. Uma informação que é importante para cada uc é saber que professores lecionam essa unidade curricular. E depois com essa entidade é possível dispor mais informação que poderá ser interessante verificar, como que formação têm.
-
-7. Competencia
+6. Competencia
     - nome
     - descricao
 
-8. Formacao
+7. Formacao
     - nome
     - empresa
     - descricao
 
-9. Making Of:
+8. Making Of:
     - registos_trabalho (imagens)
     - descricao_decisoes
     - erros_encontrados
@@ -68,10 +61,20 @@ Depois fiz então o diagrama ER como é possível verificar na imagem:
 
 ---
 
-Quando comecei a criar as entidades no Django apercebi-me que havia certos atributos que não faziam sentido existir, ou que estavam mal situados.
+Quando comecei a criar as entidades no Django apercebi-me que havia certos atributos que não faziam sentido existir, ou que estavam mal situados, assim como apercebi-me que poderia acrescentar uma nova entidade.
+
+![alt text](media/makingof/diagrama_2.png)
+
+Professor
+- nome
+- uc (relação com a entidade **UC**)
+- formacao
+- email
+- site
+
+Esta entidade embora não tenha sido pedida, achei por bem colocar já que a meu ver faz todo sentido incluir. Uma informação que é importante para cada uc é saber que professores lecionam essa unidade curricular. E depois com essa entidade é possível dispor mais informação que poderá ser interessante verificar, como que formação têm.
 
 Na entidade **Projeto** acabei por eliminar o atributo uc, já que a entidade UC é que teria uma ligação a Projeto, ou seja, a UC é que tem um Projeto. Entretanto fiz a entidade Tecnologia que fez a relação N para N com a entidade Projeto. Nesta caso o Projeto é que tem a Tecnologia. Na entidade Tecnologia acabei por acrescentar o atributo **logo**, uma imagem do logotipo da tecnologia. Alterei também o atributo "interesse" para "classificacao". Este atributo é referente ao quão à vontade estou com uma determinada tecnologia. Também é importante referir que alterei a entidade Professor para Docente, tendo achado mais correto.
-
 
 ---
 
@@ -119,7 +122,7 @@ Fiz o carregamento de dados dos TFCs. Para isso fiz o loader_tfc.py seguindo as 
 
 ---
 
-Para carregar os dados para a entidade UC acabei por adicionar novos atributos. Usando o script dado pelo professor que utiliza uma API para ir buscar informação sobre as ucs. Analisei os ficheiros `.json` criados pelo script e escolhi alguns atributos que achei importante adicionar à minha entidade UC. Achei por bem escolher os atributos "ects", "objetivo", "programa" e "avaliacao", já que são informações relevantes para as ucs. O resto da informação que existia no `.json` também era interessante, porém na minha opinião, estes atributos eram os mais relevantes.
+Para carregar os dados para a entidade UC acabei por adicionar novos atributos, usando o script dado pelo professor que utiliza uma API para ir buscar informação sobre as ucs. Analisei os ficheiros `.json` criados pelo script e escolhi alguns atributos que achei importante adicionar à minha entidade UC. Achei por bem escolher os atributos "ects", "objetivo", "programa" e "avaliacao", já que são informações relevantes para as ucs. O resto da informação que existia no `.json` também era interessante, porém na minha opinião, estes atributos eram os mais relevantes.
 
 
 ---

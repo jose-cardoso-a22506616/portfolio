@@ -21,14 +21,15 @@ class Tfc(models.Model):
 
 
 class MakingOf(models.Model):
+    titulo = models.CharField(max_length=100)
     fotos = models.ImageField(upload_to="fotos_makingof/", blank=True)
-    descricao = models.TextField()
-    alteracao = models.CharField(max_length=500, blank=True)
-    justificacao = models.CharField(max_length=500, blank=True)
+    descricao = models.TextField(blank=True)
+    alteracao = models.TextField(blank=True)
+    justificacao = models.TextField(blank=True)
     llm = models.CharField(max_length=500, blank=True)
 
     def __str__(self):
-        return self.descricao
+        return self.titulo
 
 
 

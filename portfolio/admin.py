@@ -38,9 +38,9 @@ class FormacaoAdmin(admin.ModelAdmin):
     search_fields = ("tipo",)
 
 class MakingOfAdmin(admin.ModelAdmin):
-    list_display = ("descricao",)
-    ordering = ("descricao",)
-    search_fields = ("descricao",)
+    list_display = ("titulo",)
+    ordering = ("id",)
+    search_fields = ("id", "titulo",)
 
 class TfcsAdmin(admin.ModelAdmin):
     list_display = ("titulo", "aluno", "orientador")
