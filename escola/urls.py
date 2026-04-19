@@ -6,4 +6,5 @@ urlpatterns = [
     path("", views.cursos_view), # rota que abre diretamente a página dos cursos,
     path("professores/", views.professores_view, name="professores"),
     path("alunos/", views.alunos_view, name="alunos"),
+    path('curso/<int:id>', views.curso_view, name="curso"),
 ]
