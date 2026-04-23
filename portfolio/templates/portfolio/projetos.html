@@ -9,8 +9,16 @@
     {% for projeto in projetos %}
     <article>
         <h3>{{ projeto.nome }}</h3>
+
         <p>{{projeto.descricao}}</p>
         <br>
+
+        {% if projeto.uc %}
+            <h4>UC:</h4>
+            <p>{{projeto.uc.nome}}</p>
+        {% endif %}
+        <br>
+
         <h4>Tecnologias:</h4>
 
         {% for tecnologia in projeto.tecnologia.all %}

@@ -11,7 +11,7 @@ def licenciatura_view(request):
 
 def uc_view(request):
 
-    ucs = UC.objects.prefetch_related("docente").select_related("projeto")
+    ucs = UC.objects.prefetch_related("docente")
     
 
     return render(request, "portfolio/uc.html", {"ucs":ucs})

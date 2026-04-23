@@ -65,16 +65,7 @@ class Tecnologia(models.Model):
     
 
 
-class Projeto(models.Model):
-    nome = models.CharField(max_length=100)
-    descricao = models.TextField()
-    repositorio = models.CharField(max_length=100, blank=True)
-    conceitos = models.CharField(max_length=500)
-    tecnologia = models.ManyToManyField(Tecnologia, related_name="projetos")
-    competencia = models.ManyToManyField(Competencia, related_name="projetos")
 
-    def __str__(self):
-        return self.nome
 
 
 class Docente(models.Model):
@@ -95,14 +86,25 @@ class UC(models.Model):
     objetivo = models.TextField(blank=True)
     programa = models.TextField(blank=True)
 
-    projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE, related_name="ucs", blank=True, null=True)
-
     ano = models.IntegerField()
     semestre = models.CharField(max_length=20)
     ects = models.IntegerField()
 
     docente = models.ManyToManyField(Docente, related_name="ucs", blank=True)
     imagem = models.ImageField(upload_to="fotos_uc/", blank=True)
+
+    def __str__(self):
+        return self.nome
+
+class Projeto(models.Model):
+    nome = models.CharField(max_length=100)
+    descricao = models.TextField()
+    repositorio = models.CharField(max_length=100, blank=True)
+    conceitos = models.CharField(max_length=500)
+    tecnologia = models.ManyToManyField(Tecnologia, related_name="projetos")
+    competencia = models.ManyToManyField(Competencia, related_name="projetos")
+    
+    uc = models.ForeignKey(UC, on_delete=models.CASCADE, related_name="projetos", blank=True, null=True)
 
     def __str__(self):
         return self.nome
