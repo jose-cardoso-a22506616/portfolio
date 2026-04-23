@@ -9,12 +9,12 @@ def licenciatura_view(request):
     return render(request, "portfolio/licenciatura.html", {"licenciaturas":licenciaturas})
 
 
-def uc_view(request):
+def uc_view(request, id):
 
-    ucs = UC.objects.prefetch_related("docente")
+    uc = UC.objects.get(id=id)
     
 
-    return render(request, "portfolio/uc.html", {"ucs":ucs})
+    return render(request, "portfolio/uc.html", {"uc":uc})
 
 
 def projeto_view(request):

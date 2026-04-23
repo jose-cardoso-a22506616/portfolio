@@ -6,7 +6,6 @@
 <h2>UCs</h2>
 
 <section>
-    {% for uc in ucs %}
     <article>
         <h3>{{ uc.nome }}, {{ uc.ects }} ECTS</h3>
         <h4>{{ uc.ano }}º ano, {{ uc.semestre }}</h4>
@@ -32,6 +31,5 @@
         {% endfor %}
         
     </article>
-    {% endfor %}
 </section>
 {% endblock %}
