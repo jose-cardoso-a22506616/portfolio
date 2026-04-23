@@ -8,22 +8,29 @@
 <section>
     {% for uc in ucs %}
     <article>
-        <h3>{{ uc.nome }}</h3>
-        <h4>Professores:</h4>
-        <ul>
-            {% for docente in uc.docente.all %}
-                <li>{{ docente.nome }}</li>
-        </ul>
-            {% empty %}
-                <p>Ainda não há docentes atribuídos a esta disciplina</p>
-            {% endfor %}
+        <h3>{{ uc.nome }}, {{ uc.ects }} ECTS</h3>
+        <h4>{{ uc.ano }}º ano, {{ uc.semestre }}</h4>
+        <br>
+        <h4>Descrição:</h4>
+        <p>{{uc.descricao}}</p>
+        <br>
 
-        <h4>Projetos:</h4>
-            {% if uc.projeto %}
-                <li>{{ uc.projeto.nome }}</li>
-            {% else %}
-                <p>Não há projetos</p>
-            {% endif %}
+        
+        <h4>Objetivo:</h4>
+        <p>{{uc.objetivo}}</p>
+        <br>
+
+        <h4>Programa:</h4>
+        <p>{{uc.programa}}</p>
+        <br>
+
+        <h4>Professores:</h4>
+        {% for docente in uc.docente.all %}
+            <p>{{ docente.nome }}</p>
+        {% empty %}
+            <p>Ainda não há docentes atribuídos a esta disciplina</p>
+        {% endfor %}
+        
     </article>
     {% endfor %}
 </section>
