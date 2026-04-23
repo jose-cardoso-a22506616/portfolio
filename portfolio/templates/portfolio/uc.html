@@ -1,0 +1,30 @@
+<!-- templates/escola/cursos.html -->    
+
+{% extends "portfolio/base.html" %}
+    
+{% block content %}
+<h2>UCs</h2>
+
+<section>
+    {% for uc in ucs %}
+    <article>
+        <h3>{{ uc.nome }}</h3>
+        <h4>Professores:</h4>
+        <ul>
+            {% for docente in uc.docente.all %}
+                <li>{{ docente.nome }}</li>
+        </ul>
+            {% empty %}
+                <p>Ainda não há docentes atribuídos a esta disciplina</p>
+            {% endfor %}
+
+        <h4>Projetos:</h4>
+            {% if uc.projeto %}
+                <li>{{ uc.projeto.nome }}</li>
+            {% else %}
+                <p>Não há projetos</p>
+            {% endif %}
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

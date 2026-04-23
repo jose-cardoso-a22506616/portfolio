@@ -1,0 +1,29 @@
+<!-- templates/escola/cursos.html -->    
+
+{% extends "portfolio/base.html" %}
+    
+{% block content %}
+<h2>Licenciatura</h2>
+
+<section>
+    {% for licenciatura in licenciaturas %}
+    <article>
+    <!-- cada curso é um article, 
+     com um header com o nome do curso e do professor, 
+     e uma section com a lista de cursos-->
+        <header>
+            <h3>{{ licenciatura.nome }}</h3>
+            <p>UCs:</p>
+            <section>
+                {% for uc in licenciatura.uc.all %}
+                <article>
+                    <p>{{ uc.nome }}</p>
+                </article>
+                {% endfor %}
+            </section>
+        </header>
+
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}
