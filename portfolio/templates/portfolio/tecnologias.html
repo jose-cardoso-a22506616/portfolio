@@ -1,0 +1,38 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Tecnologias</h2>
+
+<section>
+    {% for tecnologia in tecnologias %}
+    <article>
+        <h3>{{tecnologia.nome}}</h3>
+        <h4>Rating: {{tecnologia.classificacao}}/5</h4>
+        <br>
+        <p>{{tecnologia.descricao}}</p>
+        
+
+        {% if tecnologia.logo %}
+            <br>
+            <img src="{{tecnologia.logo.url}}" alt="" width="100" height="100">
+            <br>
+        {% endif %}
+        <br>
+        <a href="{{tecnologia.site_oficial}}" target="_blank">Site oficial</a>
+
+
+        {% if tecnologia.formacao.all %}
+            <h4>Formações:</h4>
+        {% endif %}
+
+        {% for formacao in tecnologia.formacao.all %}
+            <p>{{formacao.tipo}} </p>
+        {% endfor %}
+        
+    </article>
+    {% endfor %}
+
+</section>
+
+
+{% endblock %}

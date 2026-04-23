@@ -63,11 +63,7 @@ class Tecnologia(models.Model):
     def __str__(self):
         return f"Tecnologia: {self.nome} | Classificação: {self.classificacao}/5"
     
-
-
-
-
-
+    
 class Docente(models.Model):
     nome = models.CharField(max_length=100)
     email = models.EmailField(blank=True, null=True)
@@ -96,6 +92,7 @@ class UC(models.Model):
     def __str__(self):
         return self.nome
 
+
 class Projeto(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
@@ -108,7 +105,6 @@ class Projeto(models.Model):
 
     def __str__(self):
         return self.nome
-
 
 
 class Licenciatura(models.Model):

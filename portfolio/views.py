@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Licenciatura, UC, Projeto
+from .models import Licenciatura, UC, Projeto, Tecnologia
 
 # Create your views here.
 def licenciatura_view(request):
@@ -22,3 +22,10 @@ def projeto_view(request):
     projetos = Projeto.objects.prefetch_related("tecnologia")
 
     return render(request, "portfolio/projetos.html", {"projetos":projetos})
+
+
+def tecnologias_view(request):
+
+    tecnologias = Tecnologia.objects.prefetch_related("formacao")
+
+    return render(request, "portfolio/tecnologias.html", {"tecnologias":tecnologias})
