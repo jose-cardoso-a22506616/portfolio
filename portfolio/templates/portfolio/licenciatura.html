@@ -20,7 +20,12 @@
         <p>{{licenciatura.objetivos}}</p>
         <br>
 
-        <a href="">Clica aqui para ver as UCs</a> <!--TODO acrescentar o href com id-->
+        <h4>UCs:</h4>
+        {% for uc in licenciatura.uc.all %}
+
+            <a href="">{{uc.nome}}</a>
+            <br>
+        {% endfor %}
     </article>
     {% endfor %}
 </section>
