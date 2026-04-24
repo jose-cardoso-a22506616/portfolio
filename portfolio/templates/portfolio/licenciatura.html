@@ -22,9 +22,11 @@
 
         <h4>UCs:</h4>
         {% for uc in licenciatura.uc.all %}
+            <a href="{% url 'docentes' licenciatura.id %}">Ver docentes</a>
 
             <a href="{% url 'uc' uc.id %}">{{uc.nome}}</a>
             <br>
+
         {% endfor %}
     </article>
     {% endfor %}
