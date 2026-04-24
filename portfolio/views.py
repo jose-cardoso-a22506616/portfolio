@@ -59,3 +59,10 @@ def tfcs_view(request):
     tfcs = Tfc.objects.all()
 
     return render(request, "portfolio/tfcs.html", {"tfcs":tfcs})
+
+
+def makingof_view(request):
+    
+    makingofs = MakingOf.objects.all()
+
+    return render(request, "portfolio/makingof.html", {"makingofs":makingofs})
