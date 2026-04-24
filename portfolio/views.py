@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Licenciatura, UC, Projeto, Tecnologia, Docente
+from .models import Licenciatura, UC, Projeto, Tecnologia, Docente, Competencia
 
 # Create your views here.
 def licenciatura_view(request):
@@ -38,3 +38,10 @@ def docentes_view(request, id):
     docentes = Docente.objects.filter(ucs__in = ucs)
 
     return render(request, "portfolio/docentes.html", {"licenciatura":licenciatura, "ucs":ucs, "docentes":docentes})
+
+
+def competencia_view(request):
+
+    competencias = Competencia.objects.all()
+
+    return render(request, "portfolio/competencias.html", {"competencias":competencias})
