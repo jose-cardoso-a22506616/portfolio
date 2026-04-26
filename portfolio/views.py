@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Licenciatura, UC, Projeto, Tecnologia, Docente, Competencia, Formacao, Tfc, MakingOf
+from .forms import ProjetoForm
 
 # Create your views here.
 def licenciatura_view(request):
@@ -66,3 +67,39 @@ def makingof_view(request):
     makingofs = MakingOf.objects.all()
 
     return render(request, "portfolio/makingof.html", {"makingofs":makingofs})
+
+
+
+# CRUD
+
+def novo_projeto_view(request):
+
+    form = ProjetoForm(request.POST or None, request.FILES)
+    
+    if form.is_valid():
+        form.save()
+        return redirect('projetos')
+
+    return render(request, "portfolio/novo_projeto.html", {"form":form})
+
+
+def edita_projeto_view(request, projeto_id):
+    projeto = Projeto.objects.get(id=projeto_id)
+
+    if request.POST:
+        form = ProjetoForm(request.POST or None, request.FILES, instance=projeto)
+
+        if form.is_valid():
+            form.save()
+            return redirect("projetos")
+    else:
+        form = ProjetoForm(instance = projeto)
+
+        context = {"form":form, "projeto":projeto}
+        return render(request, "portfolio/edita_projeto.html", context)
+    
+
+def apaga_projeto_view(request, projeto_id):
+    projeto = Projeto.objects.get(id=projeto_id)
+    projeto.delete()
+    return redirect("projetos")

@@ -38,6 +38,14 @@
             <br>
             <a href="{{projeto.repositorio}}" target="_blank">Clica aqui para ver o repositorio</a>
         {% endif %}
+
+        <a href="{% url 'edita_projeto' projeto.id %}">
+            <button>Edita Projeto</button>
+        </a>
+
+        <a href="{% url 'apaga_projeto' projeto.id %}">
+            <button>Apaga Projeto</button>
+        </a>
     </article>
     {% endfor %}
 </section>

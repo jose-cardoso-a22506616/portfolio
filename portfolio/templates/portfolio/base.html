@@ -8,6 +8,11 @@
     <title>Portfólio</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'portfolio/styles.css' %}">
+    <style>
+        .errorlist {
+            display:none;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -20,6 +25,8 @@
             <a href="{% url 'formacoes' %}">Formações</a>
             <a href="{% url 'tfcs' %}">TFCs</a>
             <a href="{% url 'makingof' %}">MakingOf</a>
+
+            <a href="{% url 'novo_projeto' %}">Inserir novo projeto</a>
         </nav>
     </header>
 
