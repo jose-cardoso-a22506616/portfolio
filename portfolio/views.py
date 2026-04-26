@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Licenciatura, UC, Projeto, Tecnologia, Docente, Competencia, Formacao, Tfc, MakingOf
-from .forms import ProjetoForm
+from .forms import ProjetoForm, TecnologiaForm
 
 # Create your views here.
 def licenciatura_view(request):
@@ -103,3 +103,34 @@ def apaga_projeto_view(request, projeto_id):
     projeto = Projeto.objects.get(id=projeto_id)
     projeto.delete()
     return redirect("projetos")
+
+
+def novo_tecnologia_view(request):
+    form = TecnologiaForm(request.POST or None, request.FILES)
+
+    if form.is_valid():
+        form.save()
+        return redirect("tecnologias")
+    
+    return render(request, "portfolio/novo_tecnologia.html", {"form":form})
+
+
+def edita_tecnologia_view(request, tecnologia_id):
+    tecnologia = Tecnologia.objects.get(id=tecnologia_id)
+
+    if request.POST:
+        form = TecnologiaForm(request.POST or None, request.FILES, instance=tecnologia)
+        if form.is_valid():
+            form.save()
+            return redirect("tecnologias")
+    else:
+        form = TecnologiaForm(instance=tecnologia)
+
+    context = {"form":form, "tecnologia":tecnologia}
+    return render(request, "portfolio/edita_tecnologia.html", context)
+
+
+def apaga_tecnologia_view(request, tecnologia_id):
+    tecnologia = Tecnologia.objects.get(id=tecnologia_id)
+    tecnologia.delete()
+    return redirect("tecnologias")

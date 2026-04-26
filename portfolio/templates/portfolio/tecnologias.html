@@ -28,6 +28,14 @@
         {% for formacao in tecnologia.formacao.all %}
             <p>{{formacao.tipo}} </p>
         {% endfor %}
+
+        <a href="{% url 'edita_tecnologia' tecnologia.id %}">
+            <button>Editar informação da Tecnologia</button>
+        </a>
+
+        <a href="{% url 'apaga_tecnologia' tecnologia.id %}">
+            <button>Apagar tecnologias</button>
+        </a>
         
     </article>
     {% endfor %}
