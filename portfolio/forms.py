@@ -1,5 +1,5 @@
 from django import forms
-from .models import Projeto, Tecnologia, Competencia
+from .models import Projeto, Tecnologia, Competencia, Formacao
 
 class ProjetoForm(forms.ModelForm):
     class Meta:
@@ -16,4 +16,10 @@ class TecnologiaForm(forms.ModelForm):
 class CompetenciaForm(forms.ModelForm):
     class Meta:
         model = Competencia
+        fields = "__all__"
+
+
+class FormacaoForm(forms.ModelForm):
+    class Meta:
+        model = Formacao
         fields = "__all__"

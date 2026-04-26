@@ -10,6 +10,15 @@
             <h4>{{formacao.data}}</h4>
             <br>
             <p>{{formacao.descricao}}</p>
+
+
+            <a href="{% url 'edita_formacao' formacao.id %}">
+                <button>Editar Formacão</button>
+            </a>
+
+            <a href="{% url 'apaga_formacao' formacao.id %}">
+                <button>Apagar Formacão</button>
+            </a>
         </article>
     {% endfor %}
 </section>
