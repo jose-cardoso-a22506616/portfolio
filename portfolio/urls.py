@@ -21,5 +21,9 @@ urlpatterns = [
 
     path("tecnologia/novo", views.novo_tecnologia_view, name="novo_tecnologia"),
     path("tecnologia/<int:tecnologia_id>/edita", views.edita_tecnologia_view, name="edita_tecnologia"),
-    path("tecnologia/<int:tecnologia_id>/apaga", views.apaga_tecnologia_view, name="apaga_tecnologia")
+    path("tecnologia/<int:tecnologia_id>/apaga", views.apaga_tecnologia_view, name="apaga_tecnologia"),
+
+    path("competencia/novo", views.novo_competencia_view, name="novo_competencia"),
+    path("competencia/<int:competencia_id>/edita", views.edita_competencia_view, name="edita_competencia"),
+    path("competencia/<int:competencia_id>/apaga", views.apaga_competencia_view, name="apaga_competencia"),
 ]

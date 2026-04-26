@@ -8,6 +8,15 @@
         <article>
             <h3>{{competencia.tipo}}</h3>
             <p>{{competencia.descricao}}</p>
+
+            <a href="{% url 'edita_competencia' competencia.id %}">
+                <button>Editar informação da Competência</button>
+            </a>
+
+            <a href="{% url 'apaga_competencia' competencia.id %}">
+                <button>Apagar Competência</button>
+            </a>
+
         </article>
     {% endfor %}
 </section>
