@@ -60,6 +60,8 @@ class Tecnologia(models.Model):
     classificacao = models.IntegerField()
     formacao = models.ManyToManyField(Formacao, related_name="tecnologias", blank=True)
 
+    portfolio = models.BooleanField()
+
     def __str__(self):
         return f"Tecnologia: {self.nome} | Classificação: {self.classificacao}/5"
     

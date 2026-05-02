@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Licenciatura, UC, Projeto, Tecnologia, Docente, Competencia, Formacao, Tfc, MakingOf
-from .forms import ProjetoForm, TecnologiaForm, CompetenciaForm, FormacaoForm
+from .models import *
+from .forms import *
 
-# Create your views here.
+# VIEWS
 def licenciatura_view(request):
 
     licenciaturas = Licenciatura.objects.prefetch_related("uc").all()
@@ -67,6 +67,15 @@ def makingof_view(request):
     makingofs = MakingOf.objects.all()
 
     return render(request, "portfolio/makingof.html", {"makingofs":makingofs})
+
+
+def about_view(request):
+    tecnologias = Tecnologia.objects.all()
+    makingofs = MakingOf.objects.all()
+
+    context = {"tecnologias":tecnologias, "makingofs":makingofs}
+
+    return render(request, "portfolio/about.html", context)
 
 
 

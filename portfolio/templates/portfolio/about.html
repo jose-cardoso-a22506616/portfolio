@@ -1,0 +1,39 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Olá e bem-vindo ao meu portfólio!</h2>
+
+<section>
+    <h3></h3>
+</section>
+
+<section>
+    <h3>Tecnologias usadas para este site</h3>
+
+    {% for tecnologia in tecnologias %}
+        {% if tecnologia.portfolio %}
+        <article>
+            <h4>{{ tecnologia.nome }}</h4>
+            <p>{{ tecnologia.descricao }}</p>
+            <p>{{tecnologia.calssificacao}}</p>
+        </article>
+        {% endif %}
+    {% endfor %}
+</section>
+
+<section>
+    <h3>Making Of</h3>
+
+    {% for makingof in makingofs %}
+        <article>
+            <h4>{{makingof.titulo}}</h4>
+            <p>{{makingof.descricao}}</p>
+            <p>{{makingof.alteracao}}</p>
+            <p>{{makingof.justificacao}}</p>
+        </article>
+    {% endfor %}
+</section>
+
+
+
+{% endblock %}
