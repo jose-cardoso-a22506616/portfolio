@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
+from django.conf import settings
+import os
 
 # VIEWS
 def licenciatura_view(request):
@@ -73,7 +75,12 @@ def about_view(request):
     tecnologias = Tecnologia.objects.all()
     makingofs = MakingOf.objects.all()
 
-    context = {"tecnologias":tecnologias, "makingofs":makingofs}
+    path = os.path.join(settings.BASE_DIR, "portfolio/static/portfolio/about/mvt.md")
+
+    with open(path, "r", encoding="utf-8") as f:
+        mvt = f.read()
+
+    context = {"tecnologias":tecnologias, "makingofs":makingofs, "mvt":mvt}
 
     return render(request, "portfolio/about.html", context)
 
