@@ -5,6 +5,12 @@
 {% block content %}
 <h2>Projetos</h2>
 
+{% if gestor %}
+    <a href="{% url 'novo_projeto' %}">
+        <button>Inserir novo Projeto</button>
+    </a>
+{% endif %}
+
 <section>
     {% for projeto in projetos %}
     <article>
@@ -39,13 +45,17 @@
             <a href="{{projeto.repositorio}}" target="_blank">Clica aqui para ver o repositorio</a>
         {% endif %}
 
-        <a href="{% url 'edita_projeto' projeto.id %}">
-            <button>Edita Projeto</button>
-        </a>
 
-        <a href="{% url 'apaga_projeto' projeto.id %}">
-            <button>Apaga Projeto</button>
-        </a>
+        {% if gestor %}
+            <a href="{% url 'edita_projeto' projeto.id %}">
+                <button>Edita Projeto</button>
+            </a>
+
+            <a href="{% url 'apaga_projeto' projeto.id %}">
+                <button>Apaga Projeto</button>
+            </a>
+        {% endif %}
+        
     </article>
     {% endfor %}
 </section>

@@ -2,8 +2,12 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 from django.conf import settings
+from django.contrib.auth.models import Group
 import os
 
+def is_gestor(user):
+    return user.groups.filter(name="gestor-portfolio").exists()
+    
 # VIEWS
 def licenciatura_view(request):
 
@@ -24,14 +28,14 @@ def projeto_view(request):
 
     projetos = Projeto.objects.prefetch_related("tecnologia")
 
-    return render(request, "portfolio/projetos.html", {"projetos":projetos})
+    return render(request, "portfolio/projetos.html", {"projetos":projetos, "gestor":is_gestor(request.user)})
 
 
 def tecnologias_view(request):
 
     tecnologias = Tecnologia.objects.prefetch_related("formacao")
 
-    return render(request, "portfolio/tecnologias.html", {"tecnologias":tecnologias})
+    return render(request, "portfolio/tecnologias.html", {"tecnologias":tecnologias, "gestor":is_gestor(request.user)})
 
 
 def docentes_view(request, id):
@@ -47,14 +51,14 @@ def competencias_view(request):
 
     competencias = Competencia.objects.all()
 
-    return render(request, "portfolio/competencias.html", {"competencias":competencias})
+    return render(request, "portfolio/competencias.html", {"competencias":competencias, "gestor":is_gestor(request.user)})
 
 
 def formacoes_view(request):
 
     formacoes = Formacao.objects.all()
 
-    return render(request, "portfolio/formacoes.html", {"formacoes":formacoes})
+    return render(request, "portfolio/formacoes.html", {"formacoes":formacoes, "gestor":is_gestor(request.user)})
 
 
 def tfcs_view(request):

@@ -3,19 +3,29 @@
 {% block content %}
 <h2>Competências</h2>
 
+{% if gestor %}
+    <a href="{% url 'novo_competencia' %}">
+        <button>Inserir nova Competência</button>
+    </a>
+{% endif %}
+
 <section>
     {% for competencia in competencias %}
         <article>
             <h3>{{competencia.tipo}}</h3>
             <p>{{competencia.descricao}}</p>
 
-            <a href="{% url 'edita_competencia' competencia.id %}">
-                <button>Editar informação da Competência</button>
-            </a>
+            {% if gestor %}
 
-            <a href="{% url 'apaga_competencia' competencia.id %}">
-                <button>Apagar Competência</button>
-            </a>
+                <a href="{% url 'edita_competencia' competencia.id %}">
+                    <button>Editar informação da Competência</button>
+                </a>
+
+                <a href="{% url 'apaga_competencia' competencia.id %}">
+                    <button>Apagar Competência</button>
+                </a>
+
+            {% endif %}
 
         </article>
     {% endfor %}

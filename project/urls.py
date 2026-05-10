@@ -25,7 +25,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("escola/", include("escola.urls")),       #     <- rota para aplicação web escola
     path("", include("portfolio.urls")),
-    path("portfolio/", include("portfolio.urls"))
+    path("portfolio/", include("portfolio.urls")),
+    path("accounts/", include("accounts.urls")),
 ]
 
 if settings.DEBUG:

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "portfolio",
     "escola",
     "markdownify.apps.MarkdownifyConfig",
+    "accounts",
 ]
 
 MIDDLEWARE = [
