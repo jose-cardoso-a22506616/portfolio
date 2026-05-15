@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserRegisterForm
+from django.contrib.auth.models import Group
 
 # Create your views here.
 def login_view(request):
@@ -45,6 +46,9 @@ def registo_view(request):
         if form.is_valid():
 
             user = form.save()
+
+            grupo = Group.objects.get(name="autores")
+            user.groups.add(grupo)
 
             login(request, user)
 

@@ -1,0 +1,43 @@
+{% extends "portfolio/base.html" %}
+{% block content %}
+
+    <h2>Artigos</h2>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'novo_artigo' %}">
+            <button>Novo artigo</button>
+            <br>
+        </a>
+    {% endif %}
+
+    {% for artigo in artigos %}
+    <br>
+        <article>
+            <h3>Submetido por: {{artigo.autor}} no dia {{artigo.data_criacao}}</h3>
+
+            {% if artigo.autor == request.user %}
+                <a href="{% url 'edita_artigo' artigo.id %}">
+                    <button>Edita Artigo</button>
+                </a>
+
+                <a href="{% url 'apaga_artigo' artigo.id %}">
+                    <button>Apaga artigo</button>
+                </a>
+            {% endif %}
+
+            {% if artigo.link_externo %}
+            <br>
+                <a href="{{artigo.link_externo}}">Link</a>
+            {% endif %}
+
+            <p>{{artigo.texto}}</p>
+
+            {% if artigo.fotografia %}
+                <img src="{{artigos.fotografia.url}}" alt="" width="250">
+            {% endif %}
+
+        </article>
+    {% endfor %}
+        
+
+{% endblock %}

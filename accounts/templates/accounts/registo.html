@@ -1,8 +1,12 @@
-<h1>Registo</h1>
+{% extends "portfolio/base.html" %}
+{% block content %}
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
+    <h1>Registo</h1>
 
-    <button type="submit">Registar</button>
-</form>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Registar</button>
+    </form>
+{% endblock %}
