@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     "escola",
     "markdownify.apps.MarkdownifyConfig",
     "accounts",
-    "artigos"
+    "artigos",
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +56,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "project.urls"
@@ -79,11 +82,36 @@ WSGI_APPLICATION = "project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
+## em settings.py
+
+import environ
+
+# inicializar environ
+env = environ.Env()
+
+# ler ficheiro .env (opcional mas recomendado)
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': env('CLOUDINARY_API_KEY'),
+    'API_SECRET': env('CLOUDINARY_API_SECRET'),
+}
+
+# settings.py
+
+STORAGES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+## definicao da base de dados psql em Neon
+DATABASES = {
+    "default": env.db("DATABASE_URL")
 }
 
 
@@ -123,9 +151,10 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 MARKDOWNIFY = {
    "default": {

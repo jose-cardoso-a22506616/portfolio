@@ -3,16 +3,16 @@ from django.db import models
 # Create your models here.
 
 class Tfc(models.Model):
-    titulo = models.CharField(max_length=100)
-    aluno = models.CharField(max_length=100)
-    orientador = models.CharField(max_length=100)
-    licenciatura = models.CharField(max_length=100)
+    titulo = models.TextField()
+    aluno = models.TextField()
+    orientador = models.TextField()
+    licenciatura = models.TextField()
     pdf = models.URLField()
     email = models.EmailField()
     resumo = models.TextField()
-    palavras_chave = models.CharField(max_length=100)
-    area = models.CharField(max_length=100)
-    tecnologias = models.CharField(max_length=100)
+    palavras_chave = models.TextField()
+    area = models.TextField()
+    tecnologias = models.TextField()
     rating = models.IntegerField()
 
     def __str__(self):
