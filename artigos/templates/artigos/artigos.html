@@ -15,6 +15,20 @@
         <article>
             <h3>Submetido por: {{artigo.autor}} no dia {{artigo.data_criacao}}</h3>
 
+            <p>Total de likes: {{ artigo.total_likes }}</p>
+
+            {% if user.is_authenticated %}
+                <form action="{% url 'like' artigo.id %}" method="POST">
+                    {% csrf_token %}
+
+                    {% if user in artigo.likes.all %}
+                            <button type="submit">Remover Like</button>
+                    {% else %}
+                            <button type="submit">Like</button>
+                    {% endif %}
+                </form>
+            {% endif %}
+
             {% if artigo.autor == request.user %}
                 <a href="{% url 'edita_artigo' artigo.id %}">
                     <button>Edita Artigo</button>
@@ -35,6 +49,34 @@
             {% if artigo.fotografia %}
                 <img src="{{artigos.fotografia.url}}" alt="" width="250">
             {% endif %}
+
+            <h3>Comentários</h3>
+
+            <a href="{% url 'comentar_artigo' artigo.id %}">
+                <button>Comentar Artigo</button>
+            </a>
+            
+            <details>
+                <summary>Ver comentários</summary>
+
+                {% for comentario in artigo.comentarios.all %}
+                    <h4>Comentário feito por {{comentario.autor.username}} em {{comentario.data_criacao}}</h4>
+                    
+                    {% if comentario.autor == request.user %}
+                        <a href="{% url 'edita_comentario' comentario.id %}">
+                            <button>Edita Comentário</button>
+                        </a>
+
+                        <a href="{% url 'apaga_comentario' comentario.id %}">
+                            <button>Apaga Comentário</button>
+                        </a>
+                    {% endif %}
+                    
+                    <p>{{comentario.texto}}</p>
+                {% endfor %}
+
+            </details>
+
 
         </article>
     {% endfor %}

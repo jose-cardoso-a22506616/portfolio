@@ -1,0 +1,29 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+
+<h1>Artigo</h1>
+
+<p>{{ artigo.texto }}</p>
+
+{% if artigo.fotografia %}
+    <img src="{{ artigo.fotografia.url }}" width="400">
+{% endif %}
+
+<hr>
+
+<h3>Adicionar comentário</h3>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        Comentar
+    </button>
+
+    </form>
+
+{% endblock %}

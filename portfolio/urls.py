@@ -13,7 +13,7 @@ urlpatterns = [
     path("formacoes/", views.formacoes_view, name="formacoes"),
     path("tfcs/", views.tfcs_view, name="tfcs"),
     path("makingof/", views.makingof_view, name="makingof"),
-    path("about", views.about_view, name="about"),
+    path("about/", views.about_view, name="about"),
 
     #CRUD
     path("projeto/novo", views.novo_projeto_view, name="novo_projeto"),
