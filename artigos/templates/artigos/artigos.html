@@ -1,85 +1,152 @@
 {% extends "portfolio/base.html" %}
+
 {% block content %}
 
-    <h2>Artigos</h2>
+<h2>Artigos</h2>
 
-    {% if user.is_authenticated %}
-        <a href="{% url 'novo_artigo' %}">
-            <button>Novo artigo</button>
-            <br>
-        </a>
-    {% endif %}
+{% if user.is_authenticated %}
+    <a href="{% url 'novo_artigo' %}">
+        <button>Novo Artigo</button>
+    </a>
+{% endif %}
+
+<section>
 
     {% for artigo in artigos %}
-    <br>
+
         <article>
-            <h3>Submetido por: {{artigo.autor}} no dia {{artigo.data_criacao}}</h3>
 
-            <p>Total de likes: {{ artigo.total_likes }}</p>
+            <header>
+                <h3>{{ artigo.autor.username }}</h3>
+                <p>
+                    Publicado em {{ artigo.data_criacao }}
+                </p>
+            </header>
 
-            {% if user.is_authenticated %}
-                <form action="{% url 'like' artigo.id %}" method="POST">
-                    {% csrf_token %}
-
-                    {% if user in artigo.likes.all %}
-                            <button type="submit">Remover Like</button>
-                    {% else %}
-                            <button type="submit">Like</button>
-                    {% endif %}
-                </form>
-            {% endif %}
-
-            {% if artigo.autor == request.user %}
-                <a href="{% url 'edita_artigo' artigo.id %}">
-                    <button>Edita Artigo</button>
-                </a>
-
-                <a href="{% url 'apaga_artigo' artigo.id %}">
-                    <button>Apaga artigo</button>
-                </a>
-            {% endif %}
+            <p>{{ artigo.texto }}</p>
 
             {% if artigo.link_externo %}
-            <br>
-                <a href="{{artigo.link_externo}}">Link</a>
+                <a href="{{ artigo.link_externo }}" target="_blank">
+                    Ver link externo
+                </a>
             {% endif %}
-
-            <p>{{artigo.texto}}</p>
 
             {% if artigo.fotografia %}
-                <img src="{{artigos.fotografia.url}}" alt="" width="250">
+                <img src="{{ artigo.fotografia.url }}" alt="">
             {% endif %}
 
-            <h3>Comentários</h3>
+            <div class="likes">
 
-            <a href="{% url 'comentar_artigo' artigo.id %}">
-                <button>Comentar Artigo</button>
-            </a>
-            
+                <p>❤️ {{ artigo.total_likes }} likes</p>
+
+                {% if user.is_authenticated %}
+                    <form action="{% url 'like' artigo.id %}" method="POST">
+                        {% csrf_token %}
+
+                        {% if user in artigo.likes.all %}
+                            <button type="submit">
+                                Remover Like
+                            </button>
+                        {% else %}
+                            <button type="submit">
+                                Like
+                            </button>
+                        {% endif %}
+                    </form>
+                {% endif %}
+
+            </div>
+
+            {% if artigo.autor == request.user %}
+
+                <div class="acoes">
+
+                    <a href="{% url 'edita_artigo' artigo.id %}">
+                        <button>
+                            Editar Artigo
+                        </button>
+                    </a>
+
+                    <a href="{% url 'apaga_artigo' artigo.id %}">
+                        <button>
+                            Apagar Artigo
+                        </button>
+                    </a>
+
+                </div>
+
+            {% endif %}
+
             <details>
-                <summary>Ver comentários</summary>
+
+                <summary>
+                    Comentários ({{ artigo.comentarios.count }})
+                </summary>
+
+                <br>
+
+                <a href="{% url 'comentar_artigo' artigo.id %}">
+                    <button>
+                        Comentar
+                    </button>
+                </a>
+
+                <br><br>
 
                 {% for comentario in artigo.comentarios.all %}
-                    <h4>Comentário feito por {{comentario.autor.username}} em {{comentario.data_criacao}}</h4>
-                    
-                    {% if comentario.autor == request.user %}
-                        <a href="{% url 'edita_comentario' comentario.id %}">
-                            <button>Edita Comentário</button>
-                        </a>
 
-                        <a href="{% url 'apaga_comentario' comentario.id %}">
-                            <button>Apaga Comentário</button>
-                        </a>
-                    {% endif %}
-                    
-                    <p>{{comentario.texto}}</p>
+                    <div class="comentario">
+
+                        <h4>
+                            {{ comentario.autor.username }}
+                        </h4>
+
+                        <small>
+                            {{ comentario.data_criacao }}
+                        </small>
+
+                        <p>
+                            {{ comentario.texto }}
+                        </p>
+
+                        {% if comentario.autor == request.user %}
+
+                            <div class="acoes">
+
+                                <a href="{% url 'edita_comentario' comentario.id %}">
+                                    <button>
+                                        Editar
+                                    </button>
+                                </a>
+
+                                <a href="{% url 'apaga_comentario' comentario.id %}">
+                                    <button>
+                                        Apagar
+                                    </button>
+                                </a>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                {% empty %}
+
+                    <p>Sem comentários.</p>
+
                 {% endfor %}
 
             </details>
 
-
         </article>
+
+    {% empty %}
+
+        <p>Não existem artigos.</p>
+
     {% endfor %}
-        
+
+</section>
 
 {% endblock %}
